@@ -1,16 +1,3 @@
 {
-   "stable-baselines3": {
-      "url": "https://github.com/DLR-RM/stable-baselines3",
-      "collection_name": "stable-baselines3",
-      "local_path": "data/stable-baselines3/repo",
-      "processed_date": "2024-12-01",
-      "status": "Embedded"
-    },
-    "requests":{
-      "url": "https://github.com/psf/requests",
-      "collection_name": "requests",
-      "local_path": "data/requests/repo",
-      "processed_date": "2024-12-01",
-      "status": "Embedded"
-    }
+
 }

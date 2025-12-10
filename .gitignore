@@ -4,5 +4,6 @@ models
 .env
 /*/__pycache
 __pycache__
-data
-chromadb
+data/*/
+chromadb/*/
+local_repos.json
