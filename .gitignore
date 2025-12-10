@@ -7,3 +7,5 @@ __pycache__
 data/*/
 chromadb/*/
 local_repos.json
+!chromadb/requests/
+!data/requests/
