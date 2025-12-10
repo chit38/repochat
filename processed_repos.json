@@ -1,3 +1,9 @@
 {
-
+"requests": {
+    "url": "https://github.com/psf/requests",
+    "collection_name": "requests",
+    "local_path": "data/requests/repo",
+    "processed_date": "2024-12-01",
+    "status": "Embedded"
+  }
 }
