@@ -65,14 +65,15 @@ Repochat is an intelligent Retrieval Augmented Generation (RAG) chatbot system d
 
 To use Repochat, you would typically:
 
-1.  Run the main script (`main.py` or `onboarding.py` if run directly).
+1.  Run the main script (`main.py`).
 2.  Provide a GitHub repository URL when prompted.
 3.  The system will then ingest, process, and index the repository.
-4.  Once processed, you can interact with the `RAGChatbot` to query the repository's content.
+4.  Once processed, you can interact with the chatbot to query the repository's content.
 
 **Example Processed Repositories:**
 The system has been demonstrated to process repositories like:
 *   `https://github.com/DLR-RM/stable-baselines3`
 *   `https://github.com/psf/requests`
+
 
 ---
