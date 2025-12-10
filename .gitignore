@@ -1,0 +1,8 @@
+env
+models
+*.ipynb
+.env
+/*/__pycache
+__pycache__
+data
+chromadb

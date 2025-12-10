@@ -1,0 +1,12 @@
+gitpython
+sentence_transformers
+hf_xet
+chromadb
+jupyter
+pandas
+numpy
+tqdm
+llama_index
+llama-index-vector-stores-chroma
+llama_index-embeddings-huggingface
+llama-index-llms-google-genai 
