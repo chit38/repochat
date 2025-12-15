@@ -4,6 +4,72 @@
 
 Repochat is an intelligent Retrieval Augmented Generation (RAG) chatbot system designed to allow users to interact conversationally with the codebase of GitHub repositories. It automates the process of ingesting, processing, and indexing repository content, making it searchable and queryable through a natural language interface. This project transforms raw code into a knowledge base, enabling developers and users to quickly understand, debug, or explore repositories without manually sifting through files.   
 
+## Quick Guide 
+
+### 1️⃣ Clone the Repository
+```
+git clone <your-repo-url>
+cd <your-repo-name>
+```
+
+### 2️⃣ Create Virtual Environment (Recommended)
+```
+python -m venv .venv
+source .venv/bin/activate        # Linux / Mac
+.venv\Scripts\activate           # Windows
+```
+
+### 3️⃣ Install Dependencies
+```
+pip install -r requirements.txt
+```
+
+### 4️⃣ Environment Setup
+
+Create a .env file in the project root:
+
+```
+GOOGLE_API_KEY=your_google_api_key_here
+```
+
+### 5️⃣ Configuration
+
+Ensure `config.ini` contains the registry file path, embedding model name, correct gemini model name and model parameters
+
+The registry keeps track of onboarded repositories and their corresponding vector stores.
+
+### 6️⃣ Run the App
+
+#### 6.1 Using Gradio App
+```
+python app_gradio.py
+```
+
+You should see output similar to:
+
+`Running on local URL: http://127.0.0.1:7860`
+
+Open the URL in your browser.
+
+Using the Gradio App
+
+* Select an existing repository from the dropdown OR Paste a GitHub repository URL to onboard a new repo
+
+* Click “Onboard / Load Repo”
+
+* Start chatting with the codebase using natural language
+
+#### 6.2 Using CLI
+
+*  Run the main script (`main.py`)
+   ```
+   python main.py
+   ```
+*  Provide a GitHub repository URL when prompted.
+*  The system will then ingest, process, and index the repository.
+*  Once processed, you can interact with the chatbot to query the repository's content.
+
+
 ## Features
 
 ### 1. Repository Onboarding & Ingestion
@@ -51,24 +117,7 @@ Repochat is an intelligent Retrieval Augmented Generation (RAG) chatbot system d
 6.  **Chatbot Initialization:** A `RAGChatbot` is set up, pointing to the processed repository's vector collection.
 7.  **Query & Response:** When a user asks a question, the chatbot retrieves relevant chunks from the vector store and uses an LLM to formulate an answer based on those chunks.
 
-## Technologies Used (Implied)
 
-*   **Python:** Core programming language.
-*   **GitPython:** For cloning repositories.
-*   **ChromaDB:** Likely used as the vector database for storing embeddings.
-*   **Sentence Transformers:** For generating text embeddings.
-*   **Google API / Gemini:** For the Large Language Model (LLM) integration.
-*   **ConfigParser:** For managing configuration settings.
-*   **os, json, datetime, Path:** Standard Python libraries for file system operations, data serialization, and date handling.
-
-## Usage
-
-To use Repochat, you would typically:
-
-1.  Run the main script (`main.py`).
-2.  Provide a GitHub repository URL when prompted.
-3.  The system will then ingest, process, and index the repository.
-4.  Once processed, you can interact with the chatbot to query the repository's content.
 
 **Example Processed Repositories:**
 The system has been demonstrated to process repositories like:
@@ -77,3 +126,4 @@ The system has been demonstrated to process repositories like:
 
 
 ---
+
