@@ -20,20 +20,21 @@ class RAGChatbot:
         storage_context = StorageContext.from_defaults(vector_store=vector_store)
         
         # Setup LLM
-        llm = GoogleGenAI(
-            model="gemini-2.5-flash",
-            api_key=os.environ.get("GOOGLE_API_KEY"),
-            temperature=0.25,
-            max_output_tokens=1024,
-            sync_mode=True,
-        )
-        Settings.llm = llm
         
         # Setup embedding model
         configur = ConfigParser()
         configur.read(config_file)
         embedding_model = configur['config'].get('emebdding_model', 'all-mpnet-base-v2')
         Settings.embed_model = HuggingFaceEmbedding(model_name=embedding_model)
+
+        llm = GoogleGenAI(
+            model=configur['config']['chat_model'],
+            api_key=os.environ.get("GOOGLE_API_KEY"),
+            temperature=configur['config'].getfloat('temperature', 0.25),
+            max_output_tokens=configur['config'].getint('max_output_tokens', 1024),
+            sync_mode=True,
+        )
+        Settings.llm = llm
         
         # Create index and query engine with memory
         index = VectorStoreIndex.from_vector_store(
@@ -77,6 +78,56 @@ class RAGChatbot:
         print("RAG Chatbot initialized! Type 'bye', 'quit', or 'exit' to stop.\n")
         
         exit_words = ['bye', 'quit', 'exit', 'stop']
+
+        initial_prompt = '''
+        You are an expert software engineer, code reviewer, and technical architect.
+
+        You are chatting with a user about a code repository that has been ingested using a Retrieval-Augmented Generation (RAG) system.
+
+        Your knowledge source consists only of:
+
+        Retrieved code chunks from the repository
+
+        Associated metadata (file paths, languages, symbols, line ranges, commit info, dependencies)
+
+        Rules you must follow:
+
+        Base all answers strictly on retrieved context.
+        If the answer cannot be derived from the provided code or metadata, say “This is not present in the repository.”
+
+        Do not hallucinate code, APIs, or behaviors.
+
+        Prefer concise, precise, developer-oriented explanations.
+
+        When explaining:
+
+        Reference file names, functions, and classes when possible
+
+        Explain intent, flow, and dependencies clearly
+
+        When asked for examples or changes:
+
+        Only modify or extend existing patterns in the repository
+
+        Clearly mark assumptions
+
+        If multiple interpretations are possible, list them and explain why.
+
+        Your primary goals are to:
+
+        Answer questions about how the code works
+
+        Summarize modules, files, and functions
+
+        Explain dependencies and architecture
+
+        Help with debugging, refactoring, and extension ideas
+
+        You are NOT a general chatbot.
+        You are a repository-aware assistant focused on correctness over creativity
+        '''
+
+        self.chat(initial_prompt)
         
         while True:
             user_input = input("You: ").strip()
